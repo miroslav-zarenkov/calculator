@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: rgb(236, 232, 173);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 400px;
+    height: 600px;
+    background-color: #FFFFFF;
+    display: grid;
+    grid-template-rows: 100px 500px;
+    border: black 1px solid;
+}
+
+.input-box {
+    display: grid;
+}
+
+input[type=number] {
+    border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.number-box {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    border-top: black 1px solid;
+}
+
+.number-box-top {
+    display: grid;
+    height: 400px;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.number-box-bottom {
+    display: grid;
+    height: 100px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+button {
+    margin: 5px;
+}
