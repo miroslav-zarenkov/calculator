@@ -33,24 +33,28 @@ input::-webkit-inner-spin-button {
 
 .number-box {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 400px 100px;
     border-top: black 1px solid;
 }
 
 .number-box-top {
     display: grid;
-    height: 400px;
     grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(4, 1fr);
 }
 
 .number-box-bottom {
     display: grid;
-    height: 100px;
-    grid-template-rows: 1fr;
     grid-template-columns: 2fr 1fr 1fr;
 }
 
 button {
     margin: 5px;
 }
+
+
+/*
+*:focus {
+    outline: none;
+}
+input text*/
