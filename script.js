@@ -204,10 +204,10 @@ function resultBtn() {
         num2 = parseFloat(inputBox.value);
         operate(operator, num1, num2);
         infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
-        if (num3 == Infinity) {
-            inputBox.value = "Stop! You have violated the law!";
-            inputBox.innerHTML = inputBox.value;
+        if ((num3 == Infinity) || (num3 == -Infinity)) {
+            infoBox.innerHTML = "Stop! You have violated the law!";
             inputBox.value = "";
+            inputBox.innerHTML = inputBox.value;
             num1 = 0;
             num2 = 0;
             num3 = 0;
