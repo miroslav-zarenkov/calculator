@@ -19,16 +19,7 @@ body {
 
 .input-box {
     display: grid;
-}
-
-input[type=number] {
-    border: none;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    max-width: 400px;
 }
 
 .number-box {

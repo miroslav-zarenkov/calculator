@@ -1,7 +1,7 @@
 let num1 = 0;
 let num2 = 0;
 let num3 = 0;
-let operator;
+let operator = "";
 let inputBox = document.querySelector("#input-box");
 inputBox.value = "";
 inputBox.innerHTML = inputBox.value;
@@ -85,9 +85,18 @@ function reverse() {
 }
 
 function comma() {
-    inputBox.value = inputBox.value + ".";
-    parseFloat(inputBox.value);
-    inputBox.innerHTML = inputBox.value;
+    if (inputBox.value.toString().indexOf(".") > -1) {
+        return;
+    } else if (num3 != 0) {
+        num3 = 0;
+        inputBox.value = ".";
+        parseFloat(inputBox.value);
+        inputBox.innerHTML = inputBox.value;
+    } else {
+        inputBox.value = inputBox.value + ".";
+        parseFloat(inputBox.value);
+        inputBox.innerHTML = inputBox.value;
+    }
 }
 
 function operate(operator, a, b) {
@@ -95,42 +104,80 @@ function operate(operator, a, b) {
 }
 
 function numberValue() {
-    if (num3 == 0) {
-        inputBox.value = inputBox.value + this.value;
-        inputBox.innerHTML = inputBox.value;
-    } else {
+    if (inputBox.value == 0) {
         inputBox.value = this.value;
         inputBox.innerHTML = inputBox.value;
-        num3 = 0;
+    } else {
+        if (num3 == 0) {
+            inputBox.value = inputBox.value + this.value;
+            inputBox.innerHTML = inputBox.value;
+        } else {
+            inputBox.value = this.value;
+            inputBox.innerHTML = inputBox.value;
+            num3 = 0;
+        }
     }
 }
 
 function addBtn() {
-    num1 = parseFloat(inputBox.value);
-    inputBox.value = "";
-    inputBox.innerHTML = inputBox.value;
-    operator = add;
+    if (operator != "") {
+        resultBtn();
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operator = add;
+    } else {
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operator = add;
+    }
 }
 
 function subtractBtn() {
-    num1 = parseFloat(inputBox.value);
-    inputBox.value = "";
-    inputBox.innerHTML = inputBox.value;
-    operator = subtract;
+    if (operator != "") {
+        resultBtn();
+        console.log(num1);
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operator = subtract;
+    } else {
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operator = subtract;
+    }
 }
 
 function multiplyBtn() {
-    num1 = parseFloat(inputBox.value);
-    inputBox.value = "";
-    inputBox.innerHTML = inputBox.value;
-    operator = multiply;
+    if (operator != "") {
+        resultBtn();
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operator = multiply;
+    } else {
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operator = multiply;
+    }
 }
 
 function divideBtn() {
-    num1 = parseFloat(inputBox.value);
-    inputBox.value = "";
-    inputBox.innerHTML = inputBox.value;
-    operator = divide;
+    if (operator != "") {
+        resultBtn();
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operator = divide;
+    } else {
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operator = divide;
+    }
 }
 
 function resultBtn() {
@@ -149,7 +196,7 @@ function resultBtn() {
         inputBox.innerHTML = inputBox.value;
         num2 = 0;
     }
-
+    operator = "";
 }
 
 function clearInput() {
@@ -159,3 +206,49 @@ function clearInput() {
     inputBox.value = "";
     inputBox.innerHTML = inputBox.value;
 }
+
+
+window.addEventListener('keydown', function(e) {
+    switch (e.key) {
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+        case "0":
+            this.value = e.key;
+            numberValue();
+            break;
+        case "=":
+            resultBtn();
+            break;
+        case "+":
+            addBtn();
+            break;
+        case "-":
+            subtractBtn();
+            break;
+        case "/":
+            divideBtn();
+            break;
+        case "*":
+            multiplyBtn();
+            break;
+        case "%":
+            percentage();
+            break;
+        case ".":
+            comma();
+            break;
+        case "Backspace":
+            clearInput();
+            break;
+        case "Control":
+            reverse();
+            break;
+    }
+})
