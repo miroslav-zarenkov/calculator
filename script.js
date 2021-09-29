@@ -5,7 +5,7 @@ let operator = "";
 let operatorSign = "";
 let infoBox = document.querySelector("#info-box")
 let inputBox = document.querySelector("#input-box");
-inputBox.value = "";
+inputBox.value = "0";
 inputBox.innerHTML = inputBox.value;
 
 let percentageButton = document.querySelector("#button-percentage")
@@ -108,7 +108,10 @@ function operate(operator, a, b) {
 }
 
 function numberValue() {
-    if (inputBox.value == 0) {
+    if (inputBox.value === "0.") {
+        inputBox.value = inputBox.value + this.value;
+        inputBox.innerHTML = inputBox.value;
+    } else if (inputBox.value == 0) {
         inputBox.value = this.value;
         inputBox.innerHTML = inputBox.value;
     } else if (typeof inputBox.value == 'number') {
@@ -226,12 +229,11 @@ function clearInput() {
     operator = "";
     operatorSign = "";
     infoBox.innerHTML = "";
-    inputBox.value = "";
+    inputBox.value = "0";
     inputBox.innerHTML = inputBox.value;
 }
 
 function clearLastCharacter() {
-
     inputBox.value = inputBox.value.toString().slice(0, -1);
     inputBox.innerHTML = inputBox.value;
 }
