@@ -108,17 +108,16 @@ function operate(operator, a, b) {
 }
 
 function numberValue() {
-    if ((num1 != 0) && (num3 == 0) && (operator == "")) {
+    if (inputBox.value == 0) {
         inputBox.value = this.value;
         inputBox.innerHTML = inputBox.value;
+    } else if (typeof inputBox.value == 'number') {
+        inputBox.value = this.value;
+        inputBox.innerHTML = inputBox.value;
+        infoBox.innerHTML = "";
     } else {
-        if (inputBox.value == 0) {
-            inputBox.value = this.value;
-            inputBox.innerHTML = inputBox.value;
-        } else {
-            inputBox.value = inputBox.value + this.value;
-            inputBox.innerHTML = inputBox.value;
-        }
+        inputBox.value = inputBox.value + this.value;
+        inputBox.innerHTML = inputBox.value;
     }
 }
 
