@@ -2,6 +2,8 @@ let num1 = 0;
 let num2 = 0;
 let num3 = 0;
 let operator = "";
+let operatorSign = "";
+let infoBox = document.querySelector("#info-box")
 let inputBox = document.querySelector("#input-box");
 inputBox.value = "";
 inputBox.innerHTML = inputBox.value;
@@ -10,6 +12,7 @@ let percentageButton = document.querySelector("#button-percentage")
 let reverseButton = document.querySelector("#button-reverse");
 let commaButton = document.querySelector("#button-comma");
 let clearButton = document.querySelector("#button-clear");
+let clearLastButton = document.querySelector("#button-clear-last");
 let resultButton = document.querySelector("#button-result");
 let addButton = document.querySelector("#button-add");
 let subtractButton = document.querySelector("#button-subtract");
@@ -30,6 +33,7 @@ percentageButton.addEventListener("click", percentage)
 reverseButton.addEventListener("click", reverse)
 commaButton.addEventListener("click", comma);
 clearButton.addEventListener("click", clearInput);
+clearLastButton.addEventListener("click", clearLastCharacter);
 resultButton.addEventListener("click", resultBtn);
 addButton.addEventListener("click", addBtn);
 subtractButton.addEventListener("click", subtractBtn);
@@ -104,17 +108,16 @@ function operate(operator, a, b) {
 }
 
 function numberValue() {
-    if (inputBox.value == 0) {
+    if ((num1 != 0) && (num3 == 0) && (operator == "")) {
         inputBox.value = this.value;
         inputBox.innerHTML = inputBox.value;
     } else {
-        if (num3 == 0) {
-            inputBox.value = inputBox.value + this.value;
-            inputBox.innerHTML = inputBox.value;
-        } else {
+        if (inputBox.value == 0) {
             inputBox.value = this.value;
             inputBox.innerHTML = inputBox.value;
-            num3 = 0;
+        } else {
+            inputBox.value = inputBox.value + this.value;
+            inputBox.innerHTML = inputBox.value;
         }
     }
 }
@@ -125,13 +128,16 @@ function addBtn() {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
+        operatorSign = "+";
         operator = add;
     } else {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
+        operatorSign = "+";
         operator = add;
     }
+    infoBox.innerHTML = `${num1} ${operatorSign}`
 }
 
 function subtractBtn() {
@@ -141,13 +147,16 @@ function subtractBtn() {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
+        operatorSign = "-";
         operator = subtract;
     } else {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
+        operatorSign = "-";
         operator = subtract;
     }
+    infoBox.innerHTML = `${num1} ${operatorSign}`
 }
 
 function multiplyBtn() {
@@ -156,13 +165,16 @@ function multiplyBtn() {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
+        operatorSign = "*";
         operator = multiply;
     } else {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
+        operatorSign = "*";
         operator = multiply;
     }
+    infoBox.innerHTML = `${num1} ${operatorSign}`
 }
 
 function divideBtn() {
@@ -171,39 +183,57 @@ function divideBtn() {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
+        operatorSign = "/";
         operator = divide;
     } else {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
+        operatorSign = "/";
         operator = divide;
     }
+    infoBox.innerHTML = `${num1} ${operatorSign}`
 }
 
 function resultBtn() {
-    num2 = parseFloat(inputBox.value);
-    operate(operator, num1, num2);
-    if (num3 == Infinity) {
-        inputBox.value = "Stop! You have violated the law!";
-        inputBox.innerHTML = inputBox.value;
-        inputBox.value = "";
-        num1 = 0;
-        num2 = 0;
-        num3 = 0;
+    if (operator == "") {
+        return;
     } else {
-        num1 = num3;
-        inputBox.value = parseFloat(num1.toFixed(3));
-        inputBox.innerHTML = inputBox.value;
-        num2 = 0;
+        num2 = parseFloat(inputBox.value);
+        operate(operator, num1, num2);
+        infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
+        if (num3 == Infinity) {
+            inputBox.value = "Stop! You have violated the law!";
+            inputBox.innerHTML = inputBox.value;
+            inputBox.value = "";
+            num1 = 0;
+            num2 = 0;
+            num3 = 0;
+        } else {
+            num1 = num3;
+            inputBox.value = parseFloat(num1.toFixed(3));
+            inputBox.innerHTML = inputBox.value;
+            num2 = 0;
+            num3 = 0;
+        }
+        operator = "";
     }
-    operator = "";
 }
 
 function clearInput() {
     num1 = 0;
     num2 = 0;
     num3 = 0;
+    operator = "";
+    operatorSign = "";
+    infoBox.innerHTML = "";
     inputBox.value = "";
+    inputBox.innerHTML = inputBox.value;
+}
+
+function clearLastCharacter() {
+
+    inputBox.value = inputBox.value.toString().slice(0, -1);
     inputBox.innerHTML = inputBox.value;
 }
 
@@ -244,11 +274,16 @@ window.addEventListener('keydown', function(e) {
         case ".":
             comma();
             break;
-        case "Backspace":
+        case "Delete":
             clearInput();
             break;
         case "Control":
             reverse();
+            break;
+        case "Backspace":
+            clearLastCharacter();
+            break;
+        default:
             break;
     }
 })
