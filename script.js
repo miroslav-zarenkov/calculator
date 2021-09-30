@@ -180,7 +180,12 @@ function multiplyBtn() {
         operatorSign = "*";
         operator = multiply;
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`
+    if (num1 === NaN) {
+        infoBox.innerHTML = `suck some dick`
+    } else {
+        infoBox.innerHTML = `${num1} ${operatorSign}`
+    }
+
 }
 
 function divideBtn() {
@@ -198,8 +203,9 @@ function divideBtn() {
         operatorSign = "/";
         operator = divide;
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`
+    infoBox.innerHTML = `${operatorSign}`
 }
+
 
 function resultBtn() {
     if (operator == "") {
@@ -207,8 +213,8 @@ function resultBtn() {
     } else {
         num2 = parseFloat(inputBox.value);
         operate(operator, num1, num2);
-        infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
-        if ((num2 === 0) || (num1 === NaN)) {
+
+        if ((num2 === 0) || (num2 === NaN) || (num1 === NaN)) {
             infoBox.innerHTML = "Stop! You have violated the law!";
             inputBox.value = "";
             inputBox.innerHTML = inputBox.value;
@@ -216,6 +222,7 @@ function resultBtn() {
             num2 = "0";
             num3 = "0";
         } else {
+            infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
             num1 = num3;
             inputBox.value = parseFloat(num1.toFixed(3));
             inputBox.innerHTML = inputBox.value;
@@ -238,8 +245,12 @@ function clearInput() {
 }
 
 function clearLastCharacter() {
-    inputBox.value = inputBox.value.toString().slice(0, -1);
-    inputBox.innerHTML = inputBox.value;
+    if (inputBox.value === "0") {
+        return;
+    } else {
+        inputBox.value = inputBox.value.toString().slice(0, -1);
+        inputBox.innerHTML = inputBox.value;
+    }
 }
 
 
