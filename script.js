@@ -147,8 +147,9 @@ function addBtn() {
         operatorSign = "+";
         operator = add;
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`
+    infoBox.innerHTML = `${num1} ${operatorSign}`;
 }
+
 
 function subtractBtn() {
     if (operator != "") {
@@ -165,7 +166,7 @@ function subtractBtn() {
         operatorSign = "-";
         operator = subtract;
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`
+    infoBox.innerHTML = `${num1} ${operatorSign}`;
 }
 
 function multiplyBtn() {
@@ -183,7 +184,7 @@ function multiplyBtn() {
         operatorSign = "*";
         operator = multiply;
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`
+    infoBox.innerHTML = `${num1} ${operatorSign}`;
 }
 
 function divideBtn() {
@@ -194,14 +195,24 @@ function divideBtn() {
         inputBox.innerHTML = inputBox.value;
         operatorSign = "/";
         operator = divide;
+        if (isNaN(num1)) {
+            infoBox.innerHTML = "Can't divide by zero!"
+        } else {
+            infoBox.innerHTML = `${num1} ${operatorSign}`;
+        }
     } else {
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
         operatorSign = "/";
         operator = divide;
+        if (isNaN(num1)) {
+            infoBox.innerHTML = "Can't divide by zero!"
+        } else {
+            infoBox.innerHTML = `${num1} ${operatorSign}`;
+        }
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`
+
 }
 
 
@@ -244,6 +255,9 @@ function clearInput() {
 function clearLastCharacter() {
     if (inputBox.value === "0") {
         return;
+    } else if (inputBox.value.length == 1) {
+        inputBox.value = "0";
+        inputBox.innerHTML = inputBox.value;
     } else {
         inputBox.value = inputBox.value.toString().slice(0, -1);
         inputBox.innerHTML = inputBox.value;
