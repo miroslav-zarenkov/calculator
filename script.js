@@ -109,7 +109,7 @@ function operate(operator, a, b) {
 
 function numberValue() {
     if (inputBox.value.length > 10) {
-        inputBox.value = inputBox.value.substring(0, 10);
+        inputBox.value = inputBox.value.substring(0, 11);
     } else {
         if (inputBox.value === "0.") {
             inputBox.value = inputBox.value + this.value;
