@@ -108,23 +108,27 @@ function operate(operator, a, b) {
 }
 
 function numberValue() {
-    if (inputBox.value === "0.") {
-        inputBox.value = inputBox.value + this.value;
-        inputBox.innerHTML = inputBox.value;
-    } else if (infoBox.innerHTML === "Stop! You have violated the law!") {
-        inputBox.value = this.value;
-        inputBox.innerHTML = inputBox.value;
-        infoBox.innerHTML = "";
-    } else if (inputBox.value == 0) {
-        inputBox.value = this.value;
-        inputBox.innerHTML = inputBox.value;
-    } else if (typeof inputBox.value == 'number') {
-        inputBox.value = this.value;
-        inputBox.innerHTML = inputBox.value;
-        infoBox.innerHTML = "";
+    if (inputBox.value.length > 10) {
+        inputBox.value = inputBox.value.substring(0, 10);
     } else {
-        inputBox.value = inputBox.value + this.value;
-        inputBox.innerHTML = inputBox.value;
+        if (inputBox.value === "0.") {
+            inputBox.value = inputBox.value + this.value;
+            inputBox.innerHTML = inputBox.value;
+        } else if (infoBox.innerHTML === "Can't divide by zero!") {
+            inputBox.value = this.value;
+            inputBox.innerHTML = inputBox.value;
+            infoBox.innerHTML = "";
+        } else if (inputBox.value == 0) {
+            inputBox.value = this.value;
+            inputBox.innerHTML = inputBox.value;
+        } else if (typeof inputBox.value == 'number') {
+            inputBox.value = this.value;
+            inputBox.innerHTML = inputBox.value;
+            infoBox.innerHTML = "";
+        } else {
+            inputBox.value = inputBox.value + this.value;
+            inputBox.innerHTML = inputBox.value;
+        }
     }
 }
 
@@ -149,7 +153,6 @@ function addBtn() {
 function subtractBtn() {
     if (operator != "") {
         resultBtn();
-        console.log(num1);
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
@@ -168,24 +171,19 @@ function subtractBtn() {
 function multiplyBtn() {
     if (operator != "") {
         resultBtn();
-        num1 = parseFloat(inputBox.value);
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
         operatorSign = "*";
         operator = multiply;
-    } else {
-        num1 = parseFloat(inputBox.value);
-        inputBox.value = "";
-        inputBox.innerHTML = inputBox.value;
-        operatorSign = "*";
-        operator = multiply;
-    }
-    if (num1 === NaN) {
-        infoBox.innerHTML = `suck some dick`
-    } else {
         infoBox.innerHTML = `${num1} ${operatorSign}`
+    } else {
+        num1 = parseFloat(inputBox.value);
+        inputBox.value = "";
+        inputBox.innerHTML = inputBox.value;
+        operatorSign = "*";
+        operator = multiply;
     }
-
+    infoBox.innerHTML = `${num1} ${operatorSign}`
 }
 
 function divideBtn() {
@@ -203,7 +201,7 @@ function divideBtn() {
         operatorSign = "/";
         operator = divide;
     }
-    infoBox.innerHTML = `${operatorSign}`
+    infoBox.innerHTML = `${num1} ${operatorSign}`
 }
 
 
@@ -213,16 +211,15 @@ function resultBtn() {
     } else {
         num2 = parseFloat(inputBox.value);
         operate(operator, num1, num2);
-
+        infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
         if ((num2 === 0) || (num2 === NaN) || (num1 === NaN)) {
-            infoBox.innerHTML = "Stop! You have violated the law!";
+            infoBox.innerHTML = "Can't divide by zero!";
             inputBox.value = "";
             inputBox.innerHTML = inputBox.value;
             num1 = "0";
             num2 = "0";
             num3 = "0";
         } else {
-            infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
             num1 = num3;
             inputBox.value = parseFloat(num1.toFixed(3));
             inputBox.innerHTML = inputBox.value;
@@ -239,7 +236,7 @@ function clearInput() {
     num3 = "0";
     operator = "";
     operatorSign = "";
-    infoBox.innerHTML = "";
+    infoBox.innerHTML = "<br />";
     inputBox.value = "0";
     inputBox.innerHTML = inputBox.value;
 }
@@ -257,47 +254,161 @@ function clearLastCharacter() {
 window.addEventListener('keydown', function(e) {
     switch (e.key) {
         case "1":
+            this.value = e.key;
+            numberValue();
+            oneButton.classList.add("button-down");
+            break;
         case "2":
+            this.value = e.key;
+            numberValue();
+            twoButton.classList.add("button-down");
+            break;
         case "3":
+            this.value = e.key;
+            numberValue();
+            threeButton.classList.add("button-down");
+            break;
         case "4":
+            this.value = e.key;
+            numberValue();
+            fourButton.classList.add("button-down");
+            break;
         case "5":
+            this.value = e.key;
+            numberValue();
+            fiveButton.classList.add("button-down");
+            break;
         case "6":
+            this.value = e.key;
+            numberValue();
+            sixButton.classList.add("button-down");
+            break;
         case "7":
+            this.value = e.key;
+            numberValue();
+            sevenButton.classList.add("button-down");
+            break;
         case "8":
+            this.value = e.key;
+            numberValue();
+            eightButton.classList.add("button-down");
+            break;
         case "9":
+            this.value = e.key;
+            numberValue();
+            nineButton.classList.add("button-down");
+            break;
         case "0":
             this.value = e.key;
             numberValue();
+            zeroButton.classList.add("button-down");
             break;
         case "=":
             resultBtn();
+            resultButton.classList.add("button-down");
             break;
         case "+":
             addBtn();
+            addButton.classList.add("button-down");
             break;
         case "-":
             subtractBtn();
+            subtractButton.classList.add("button-down");
             break;
         case "/":
             divideBtn();
+            divideButton.classList.add("button-down");
             break;
         case "*":
             multiplyBtn();
+            multiplyButton.classList.add("button-down");
             break;
         case "%":
             percentage();
+            percentageButton.classList.add("button-down");
             break;
         case ".":
             comma();
+            commaButton.classList.add("button-down");
             break;
         case "Delete":
             clearInput();
+            clearButton.classList.add("button-down");
             break;
         case "Control":
             reverse();
+            reverseButton.classList.add("button-down");
             break;
         case "Backspace":
             clearLastCharacter();
+            clearLastButton.classList.add("button-down");
+            break;
+        default:
+            break;
+    }
+})
+
+window.addEventListener('keyup', function(e) {
+    switch (e.key) {
+        case "1":
+            oneButton.classList.remove("button-down");
+            break;
+        case "2":
+            twoButton.classList.remove("button-down");
+            break;
+        case "3":
+            threeButton.classList.remove("button-down");
+            break;
+        case "4":
+            fourButton.classList.remove("button-down");
+            break;
+        case "5":
+            fiveButton.classList.remove("button-down");
+            break;
+        case "6":
+            sixButton.classList.remove("button-down");
+            break;
+        case "7":
+            sevenButton.classList.remove("button-down");
+            break;
+        case "8":
+            eightButton.classList.remove("button-down");
+            break;
+        case "9":
+            nineButton.classList.remove("button-down");
+            break;
+        case "0":
+            zeroButton.classList.remove("button-down");
+            break;
+        case "=":
+            resultButton.classList.remove("button-down");
+            break;
+        case "+":
+            addButton.classList.remove("button-down");
+            break;
+        case "-":
+            subtractButton.classList.remove("button-down");
+            break;
+        case "/":
+            divideButton.classList.remove("button-down");
+            break;
+        case "*":
+            multiplyButton.classList.remove("button-down");
+            break;
+        case "%":
+            percentageButton.classList.remove("button-down");
+            break;
+        case ".":
+            commaButton.classList.remove("button-down");
+            break;
+        case "Delete":
+            clearButton.classList.remove("button-down");
+            break;
+        case "Control":
+            reverseButton.classList.remove("button-down");
+            break;
+        case "Backspace":
+            clearLastButton.classList.remove("button-down");
             break;
         default:
             break;
