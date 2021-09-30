@@ -6,6 +6,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Open Sans";
+    font-size: 30px;
 }
 
 .container {
@@ -15,11 +17,23 @@ body {
     display: grid;
     grid-template-rows: 100px 500px;
     border: black 1px solid;
+    background-color: rgb(70, 70, 70);
+}
+
+.screen {
+    margin: 10px;
+    background-color: rgb(224, 224, 224);
 }
 
 .input-box {
     display: grid;
     max-width: 400px;
+    padding-left: 5px;
+}
+
+.info-box {
+    border-bottom: black 1px solid;
+    padding-left: 5px;
 }
 
 .number-box {
@@ -41,4 +55,8 @@ body {
 
 button {
     margin: 5px;
+    padding: 5px;
+    border-radius: 15px;
+    border: 1px black solid;
+    background-color: rgb(224, 224, 224);
 }

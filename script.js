@@ -111,6 +111,10 @@ function numberValue() {
     if (inputBox.value === "0.") {
         inputBox.value = inputBox.value + this.value;
         inputBox.innerHTML = inputBox.value;
+    } else if (infoBox.innerHTML === "Stop! You have violated the law!") {
+        inputBox.value = this.value;
+        inputBox.innerHTML = inputBox.value;
+        infoBox.innerHTML = "";
     } else if (inputBox.value == 0) {
         inputBox.value = this.value;
         inputBox.innerHTML = inputBox.value;
@@ -204,28 +208,28 @@ function resultBtn() {
         num2 = parseFloat(inputBox.value);
         operate(operator, num1, num2);
         infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
-        if ((num3 == Infinity) || (num3 == -Infinity)) {
+        if (num2 === 0) {
             infoBox.innerHTML = "Stop! You have violated the law!";
             inputBox.value = "";
             inputBox.innerHTML = inputBox.value;
-            num1 = 0;
-            num2 = 0;
-            num3 = 0;
+            num1 = "0";
+            num2 = "0";
+            num3 = "0";
         } else {
             num1 = num3;
             inputBox.value = parseFloat(num1.toFixed(3));
             inputBox.innerHTML = inputBox.value;
-            num2 = 0;
-            num3 = 0;
+            num2 = "0";
+            num3 = "0";
         }
         operator = "";
     }
 }
 
 function clearInput() {
-    num1 = 0;
-    num2 = 0;
-    num3 = 0;
+    num1 = "0";
+    num2 = "0";
+    num3 = "0";
     operator = "";
     operatorSign = "";
     infoBox.innerHTML = "";
