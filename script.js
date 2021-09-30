@@ -221,23 +221,27 @@ function resultBtn() {
         return;
     } else {
         num2 = parseFloat(inputBox.value);
-        operate(operator, num1, num2);
-        infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
-        if ((num2 === 0) || (num2 === NaN) || (num1 === NaN)) {
-            infoBox.innerHTML = "Can't divide by zero!";
-            inputBox.value = "";
-            inputBox.innerHTML = inputBox.value;
-            num1 = "0";
-            num2 = "0";
-            num3 = "0";
+        if (isNaN(num2)) {
+            return;
         } else {
-            num1 = num3;
-            inputBox.value = parseFloat(num1.toFixed(3));
-            inputBox.innerHTML = inputBox.value;
-            num2 = "0";
-            num3 = "0";
+            operate(operator, num1, num2);
+            infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
+            if ((num2 === 0) || (num2 === NaN) || (num1 === NaN)) {
+                infoBox.innerHTML = "Can't divide by zero!";
+                inputBox.value = "";
+                inputBox.innerHTML = inputBox.value;
+                num1 = "0";
+                num2 = "0";
+                num3 = "0";
+            } else {
+                num1 = num3;
+                inputBox.value = parseFloat(num1.toFixed(3));
+                inputBox.innerHTML = inputBox.value;
+                num2 = "0";
+                num3 = "0";
+            }
+            operator = "";
         }
-        operator = "";
     }
 }
 
