@@ -208,7 +208,7 @@ function resultBtn() {
         num2 = parseFloat(inputBox.value);
         operate(operator, num1, num2);
         infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
-        if (num2 === 0) {
+        if ((num2 === 0) || (num1 === NaN)) {
             infoBox.innerHTML = "Stop! You have violated the law!";
             inputBox.value = "";
             inputBox.innerHTML = inputBox.value;
