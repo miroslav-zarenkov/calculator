@@ -66,6 +66,25 @@ function divide(num1, num2) {
     return num3 = num1 / num2;
 }
 
+// function percentage() {
+//     console.log(num1)
+
+//     if (num1 != 0) {
+//         num2 = parseFloat(inputBox.value);
+//         if (num2 == 0) {
+//             num2 = 1;
+//             inputBox.value = (num1 / 100) * num2;
+//             inputBox.innerHTML = parseFloat(inputBox.value.toFixed(5));
+//         } else {
+//             inputBox.value = (num1 / 100) * num2;
+//             inputBox.innerHTML = parseFloat(inputBox.value.toFixed(5));
+//         }
+//     } else {
+//         inputBox.value = 0;
+//         inputBox.innerHTML = inputBox.value;
+//     }
+// }
+
 function percentage() {
     if (num1 != 0) {
         num2 = parseFloat(inputBox.value);
@@ -95,6 +114,9 @@ function comma() {
         num3 = 0;
         inputBox.value = ".";
         parseFloat(inputBox.value);
+        inputBox.innerHTML = inputBox.value;
+    } else if (inputBox.value == "") {
+        inputBox.value = "0."
         inputBox.innerHTML = inputBox.value;
     } else {
         inputBox.value = inputBox.value + ".";
@@ -214,13 +236,12 @@ function divideBtn() {
         inputBox.innerHTML = inputBox.value;
         operatorSign = "/";
         operator = divide;
+        infoBox.innerHTML = `${num1} ${operatorSign}`;
         if (isNaN(num1)) {
             infoBox.innerHTML = "Can't divide by zero!"
             num1 = "0";
             num2 = "0";
             num3 = "0";
-        } else {
-            infoBox.innerHTML = `${num1} ${operatorSign}`;
         }
     } else {
         num1 = parseFloat(inputBox.value);
@@ -228,17 +249,19 @@ function divideBtn() {
         inputBox.innerHTML = inputBox.value;
         operatorSign = "/";
         operator = divide;
+        infoBox.innerHTML = `${num1} ${operatorSign}`;
         if (isNaN(num1)) {
             infoBox.innerHTML = "Can't divide by zero!"
             num1 = "0";
             num2 = "0";
             num3 = "0";
-        } else {
-            infoBox.innerHTML = `${num1} ${operatorSign}`;
         }
     }
 
 }
+
+
+
 
 
 function resultBtn() {
