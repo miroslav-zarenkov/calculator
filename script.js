@@ -229,6 +229,7 @@ function divideBtn() {
     if ((operator != divide) && (inputBox.innerHTML == "")) {
         operatorSign = "/";
         operator = divide;
+        infoBox.innerHTML = `${num1} ${operatorSign}`;
     } else if (operator) {
         resultBtn();
         num1 = parseFloat(inputBox.value);
@@ -257,7 +258,6 @@ function divideBtn() {
             num3 = "0";
         }
     }
-
 }
 
 
