@@ -201,7 +201,14 @@ function subtractBtn() {
         operatorSign = "-";
         operator = subtract;
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`;
+    if (isNaN(num1)) {
+        infoBox.innerHTML = `Can't divide by zero!`;
+        num1 = "0";
+        num2 = "0";
+        num3 = "0";
+    } else {
+        infoBox.innerHTML = `${num1} ${operatorSign}`;
+    }
 }
 
 function multiplyBtn() {
@@ -222,7 +229,14 @@ function multiplyBtn() {
         operatorSign = "*";
         operator = multiply;
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`;
+    if (isNaN(num1)) {
+        infoBox.innerHTML = `Can't divide by zero!`;
+        num1 = "0";
+        num2 = "0";
+        num3 = "0";
+    } else {
+        infoBox.innerHTML = `${num1} ${operatorSign}`;
+    }
 }
 
 function divideBtn() {
@@ -259,10 +273,6 @@ function divideBtn() {
         }
     }
 }
-
-
-
-
 
 function resultBtn() {
     if (operator == "") {
