@@ -23,6 +23,8 @@
     .screen {
         margin: 10px;
         background-color: rgb(224, 224, 224);
+        display: grid;
+        grid-template-rows: 40px 50px;
     }
     
     .input-box {
