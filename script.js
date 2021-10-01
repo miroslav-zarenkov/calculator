@@ -1,6 +1,6 @@
-let num1 = 0;
-let num2 = 0;
-let num3 = 0;
+let num1 = "0";
+let num2 = "0";
+let num3 = "0";
 let operator = "";
 let operatorSign = "";
 let infoBox = document.querySelector("#info-box")
@@ -133,7 +133,10 @@ function numberValue() {
 }
 
 function addBtn() {
-    if (operator != "") {
+    if ((operator != add) && (inputBox.innerHTML == "")) {
+        operatorSign = "+";
+        operator = add;
+    } else if (operator) {
         resultBtn();
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
@@ -147,12 +150,22 @@ function addBtn() {
         operatorSign = "+";
         operator = add;
     }
-    infoBox.innerHTML = `${num1} ${operatorSign}`;
+    if (isNaN(num1)) {
+        infoBox.innerHTML = `Can't divide by zero!`;
+        num1 = "0";
+        num2 = "0";
+        num3 = "0";
+    } else {
+        infoBox.innerHTML = `${num1} ${operatorSign}`;
+    }
 }
 
 
 function subtractBtn() {
-    if (operator != "") {
+    if ((operator != subtract) && (inputBox.innerHTML == "")) {
+        operatorSign = "-";
+        operator = subtract;
+    } else if (operator) {
         resultBtn();
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
@@ -170,7 +183,10 @@ function subtractBtn() {
 }
 
 function multiplyBtn() {
-    if (operator != "") {
+    if ((operator != multiply) && (inputBox.innerHTML == "")) {
+        operatorSign = "*";
+        operator = multiply;
+    } else if (operator) {
         resultBtn();
         inputBox.value = "";
         inputBox.innerHTML = inputBox.value;
@@ -188,7 +204,10 @@ function multiplyBtn() {
 }
 
 function divideBtn() {
-    if (operator != "") {
+    if ((operator != divide) && (inputBox.innerHTML == "")) {
+        operatorSign = "/";
+        operator = divide;
+    } else if (operator) {
         resultBtn();
         num1 = parseFloat(inputBox.value);
         inputBox.value = "";
@@ -197,6 +216,9 @@ function divideBtn() {
         operator = divide;
         if (isNaN(num1)) {
             infoBox.innerHTML = "Can't divide by zero!"
+            num1 = "0";
+            num2 = "0";
+            num3 = "0";
         } else {
             infoBox.innerHTML = `${num1} ${operatorSign}`;
         }
@@ -208,6 +230,9 @@ function divideBtn() {
         operator = divide;
         if (isNaN(num1)) {
             infoBox.innerHTML = "Can't divide by zero!"
+            num1 = "0";
+            num2 = "0";
+            num3 = "0";
         } else {
             infoBox.innerHTML = `${num1} ${operatorSign}`;
         }
@@ -226,13 +251,13 @@ function resultBtn() {
         } else {
             operate(operator, num1, num2);
             infoBox.innerHTML = `${num1} ${operatorSign} ${num2} =`
-            if ((num2 === 0) || (num2 === NaN) || (num1 === NaN)) {
-                infoBox.innerHTML = "Can't divide by zero!";
+            if ((num3 === -Infinity) || (num3 === Infinity)) {
                 inputBox.value = "";
                 inputBox.innerHTML = inputBox.value;
                 num1 = "0";
                 num2 = "0";
                 num3 = "0";
+                infoBox.innerHTML = "Can't divide by zero!";
             } else {
                 num1 = num3;
                 inputBox.value = parseFloat(num1.toFixed(3));
@@ -251,7 +276,7 @@ function clearInput() {
     num3 = "0";
     operator = "";
     operatorSign = "";
-    infoBox.innerHTML = "<br />";
+    infoBox.innerHTML = "";
     inputBox.value = "0";
     inputBox.innerHTML = inputBox.value;
 }
