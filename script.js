@@ -66,34 +66,19 @@ function divide(num1, num2) {
     return num3 = num1 / num2;
 }
 
-// function percentage() {
-//     console.log(num1)
-
-//     if (num1 != 0) {
-//         num2 = parseFloat(inputBox.value);
-//         if (num2 == 0) {
-//             num2 = 1;
-//             inputBox.value = (num1 / 100) * num2;
-//             inputBox.innerHTML = parseFloat(inputBox.value.toFixed(5));
-//         } else {
-//             inputBox.value = (num1 / 100) * num2;
-//             inputBox.innerHTML = parseFloat(inputBox.value.toFixed(5));
-//         }
-//     } else {
-//         inputBox.value = 0;
-//         inputBox.innerHTML = inputBox.value;
-//     }
-// }
-
 function percentage() {
     if (num1 != 0) {
-        num2 = parseFloat(inputBox.value);
-        inputBox.value = (num1 / 100) * num2;
-        inputBox.innerHTML = parseFloat(inputBox.value.toFixed(5));
+        num2 = parseFloat(inputBox.value).toFixed(3);
+        if (isNaN(num2)) {
+            return;
+        } else {
+            inputBox.value = (num1 / 100) * num2;
+            inputBox.innerHTML = parseFloat(inputBox.value.toFixed(3));
+        }
     } else {
-        parseFloat(inputBox.value);
+        parseFloat(inputBox.value).toFixed(3);
         inputBox.value = inputBox.value / 100;
-        inputBox.innerHTML = inputBox.value;
+        inputBox.innerHTML = inputBox.value.toFixed(3);
     }
 }
 
@@ -278,7 +263,8 @@ function resultBtn() {
     if (operator == "") {
         return;
     } else {
-        num2 = parseFloat(inputBox.value);
+        num2 = parseFloat(inputBox.value).toFixed(3);
+        num2 = +num2;
         if (isNaN(num2)) {
             return;
         } else {
@@ -293,7 +279,7 @@ function resultBtn() {
                 infoBox.innerHTML = "Can't divide by zero!";
             } else {
                 num1 = num3;
-                inputBox.value = parseFloat(num1.toFixed(3));
+                inputBox.value = parseFloat(num1);
                 inputBox.innerHTML = inputBox.value;
                 num2 = "0";
                 num3 = "0";
